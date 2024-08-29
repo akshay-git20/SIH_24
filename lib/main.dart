@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sih_24/screens/disease_page.dart';
+import 'package:sih_24/screens/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: DiseaseListPage(),
+      home: LoginPage(),
     );
   }
 }
