@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sih_24/theme.dart';
 
 class DetectionResult extends StatefulWidget {
   const DetectionResult({super.key});
@@ -74,7 +75,14 @@ class _DetectionResultState extends State<DetectionResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        leading: IconButton(
+            onPressed: () =>Navigator.pop(context)
+            , icon: Icon(Icons.arrow_back,color: Colors.white,)),
+        title: const Text(
+          'Result',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: CustomTheme.loginGradientStart,
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -106,7 +114,8 @@ class _DetectionResultState extends State<DetectionResult> {
                             children: [
                               Text('Disease Diagnosis: Powdery Mildew',
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
                               SizedBox(height: 8),
                               Text('Confidence Level: High',
                                   style: TextStyle(fontSize: 16)),
@@ -115,7 +124,7 @@ class _DetectionResultState extends State<DetectionResult> {
                         ),
                       ),
                     ),
-        
+
                     // Crop Health Status
                     const SizedBox(
                       width: double.infinity,
@@ -129,7 +138,8 @@ class _DetectionResultState extends State<DetectionResult> {
                                 TextSpan(
                                   text: 'Crop Health Status: ',
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                   children: [
                                     TextSpan(
                                       text: 'Infected',
@@ -184,9 +194,9 @@ class _DetectionResultState extends State<DetectionResult> {
                         ),
                       ),
                     ),
-        
+
                     // Treatment Recommendations
-        
+
                     const SizedBox(
                       width: double.infinity,
                       child: Card(
@@ -202,8 +212,8 @@ class _DetectionResultState extends State<DetectionResult> {
                               ),
                               SizedBox(height: 8),
                               ListTile(
-                                title:
-                                    Text('Preventive Measure: Adjust irrigation'),
+                                title: Text(
+                                    'Preventive Measure: Adjust irrigation'),
                               ),
                               ListTile(
                                 title: Text('Treatment Option: Fungicide X'),
@@ -214,7 +224,7 @@ class _DetectionResultState extends State<DetectionResult> {
                         ),
                       ),
                     ),
-        
+
                     // Actionable Insights
                     const SizedBox(
                       width: double.infinity,
@@ -245,7 +255,7 @@ class _DetectionResultState extends State<DetectionResult> {
                         ),
                       ),
                     ),
-        
+
                     // Additional Resources
                     TextButton(
                       onPressed: () {
@@ -254,7 +264,7 @@ class _DetectionResultState extends State<DetectionResult> {
                       child: const Text('Learn More About Powdery Mildew'),
                     ),
                     // const SizedBox(height: 16),
-        
+
                     // User Feedback
                     // const Text(
                     //   'Your Feedback:',

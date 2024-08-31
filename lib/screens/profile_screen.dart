@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sih_24/screens/edit_profile.dart';
 import 'package:sih_24/screens/login_page.dart';
 import 'package:sih_24/theme.dart';
 
@@ -85,12 +86,12 @@ class _UserProfileState extends State<UserProfile> {
                   children: <Widget>[
                     UserProfileCard(
                       onEditProfile: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const EditProfileScreen(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EditProfileScreen(),
+                          ),
+                        );
                       },
                     ),
 
@@ -132,7 +133,7 @@ class UserProfileCard extends StatelessWidget {
             // User Name
             Text(
               // map['name']!,
-              "wcd",
+              "Nikhil Soni",
               style: GoogleFonts.roboto(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -142,7 +143,7 @@ class UserProfileCard extends StatelessWidget {
             const SizedBox(height: 8.0),
             // User Email
             Text(
-              "wcd",
+              "nikhilsoni2910@gmail.com",
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.grey,

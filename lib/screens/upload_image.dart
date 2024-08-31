@@ -156,6 +156,8 @@ class _UploadImageState extends State<UploadImage> {
                 ),
                 if (_isUploaded)
                   ElevatedButton(
+                    style:ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(CustomTheme.loginGradientStart,
+                  ),foregroundColor: WidgetStateProperty.all<Color>(Colors.white),),
                   onPressed:
                       _image != null ? () => {Navigator.push(context, MaterialPageRoute(builder: (context) => const DetectionResult()))} : null,
                   child: const Text('Analyze'),
