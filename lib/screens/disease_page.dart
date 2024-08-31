@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sih_24/models/disease.dart';
 import 'package:sih_24/screens/disease_detail_page.dart';
+import 'package:sih_24/theme.dart';
 
 class DiseaseListPage extends StatefulWidget {
   @override
@@ -205,7 +206,9 @@ class _DiseaseListPageState extends State<DiseaseListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF4a7c59), // Set the app bar background color
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: CustomTheme.loginGradientStart, // Set the app bar background color
         title: Text('Plant Disease Remedies',style: TextStyle(color: Colors.white),),
         actions: [
           IconButton(
@@ -216,36 +219,45 @@ class _DiseaseListPageState extends State<DiseaseListPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0), // Add padding around the ListView
-        child: ListView.builder(
-          itemCount: diseases.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 8.0), // Space between cards
-              child: Card(
-                color: Colors.green[50], // Set the card color
-                elevation: 4.0, // Add shadow to the card
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
-                ),
-                child: ListTile(
-                  title: Text(
-                    diseases[index].name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/img/background.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+        
+          padding: const EdgeInsets.all(8.0), // Add padding around the ListView
+          child: ListView.builder(
+            itemCount: diseases.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0), // Space between cards
+                child: Card(
+                  color: Colors.green[50], // Set the card color
+                  elevation: 4.0, // Add shadow to the card
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0), // Rounded corners
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DiseaseDetailPage(disease: diseases[index]),
-                      ),
-                    );
-                  },
+                  child: ListTile(
+                    title: Text(
+                      diseases[index].name,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiseaseDetailPage(disease: diseases[index]),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
