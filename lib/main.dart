@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sih_24/screens/login_page.dart';
-import 'package:sih_24/screens/youtube_videos.dart';
 
 void main() {
   runApp(const MyApp());

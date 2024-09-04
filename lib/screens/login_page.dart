@@ -56,12 +56,17 @@ class _LoginPageState extends State<LoginPage>
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 75.0),
+                padding: const EdgeInsets.only(top: 40.0),
                 child: Image(
                     height:
                         MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
                     fit: BoxFit.fill,
                     image: const AssetImage('assets/img/img1-removebg-preview.jpg')),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text('BotanyFix',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white),),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
