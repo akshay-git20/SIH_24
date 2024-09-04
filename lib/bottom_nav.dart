@@ -6,6 +6,7 @@ import 'package:sih_24/models/disease.dart';
 import 'package:sih_24/screens/disease_page.dart';
 import 'package:sih_24/screens/profile_screen.dart';
 import 'package:sih_24/screens/upload_image.dart';
+import 'package:sih_24/screens/youtube_videos.dart';
 
 class UserBottomNav extends StatefulWidget {
   const UserBottomNav({super.key});
@@ -18,6 +19,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     const UploadImage(),
+    YouTubeListPage(),
     DiseaseListPage(),
     const UserProfile(),
   ];
@@ -78,7 +80,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
         body: _children[_currentIndex],
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
           backgroundColor: Colors.green[100],
-          itemCount: 3,
+          itemCount: 4,
           tabBuilder: (int index, bool isActive) {
             final color = isActive ? Colors.blue : Colors.grey;
             IconData iconData = Icons.quiz; // Default value
@@ -86,15 +88,19 @@ class _UserBottomNavState extends State<UserBottomNav> {
 
             switch (index) {
               case 0:
-                iconData = Icons.quiz;
-                label = 'Home';
+                iconData = Icons.upload;
+                label = 'Upload';
                 break;
               case 1:
+                iconData = Icons.video_library;
+                label = 'Videos';
+                break;
+              case 2:
                 iconData = Icons.info;
                 label = 'Disease List';
                 break;
-              case 2:
-                iconData = Icons.fitness_center;
+              case 3:
+                iconData = Icons.person;
                 label = 'Profile';
                 break;
             }

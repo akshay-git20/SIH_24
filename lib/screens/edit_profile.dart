@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sih_24/constants.dart/states_and_cities.dart';
+import 'package:sih_24/constants/states_and_cities.dart';
 import 'package:sih_24/theme.dart';
 import 'package:sih_24/widgets/custom_button.dart';
 import 'package:sih_24/widgets/custom_dropdown.dart';
