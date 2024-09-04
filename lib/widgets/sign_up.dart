@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sih_24/bottom_nav.dart';
 import '../theme.dart';
 import 'snackbar.dart';
 
@@ -230,22 +231,29 @@ class _SignUpState extends State<SignUp> {
                       tileMode: TileMode.clamp),
                 ),
                 child: MaterialButton(
-                  highlightColor: Colors.transparent,
-                  splashColor: CustomTheme.loginGradientEnd,
-                  //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
-                    child: Text(
-                      'SIGN UP',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: 'WorkSansBold'),
+                    highlightColor: Colors.transparent,
+                    splashColor: CustomTheme.loginGradientEnd,
+                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 42.0),
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: 'WorkSansBold'),
+                      ),
                     ),
-                  ),
-                  onPressed: () => _toggleSignUpButton(),
-                ),
+                    onPressed: () {
+                      _toggleSignUpButton();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserBottomNav(),
+                        ),
+                      );
+                    }),
               )
             ],
           ),
