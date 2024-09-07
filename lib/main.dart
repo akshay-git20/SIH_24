@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sih_24/bottom_nav.dart';
+import 'package:sih_24/models/disease.dart';
+import 'package:sih_24/screens/disease_detail_page.dart';
 import 'package:sih_24/screens/login_page.dart';
 
 void main() {
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home:UserBottomNav(),
     );
   }
 }

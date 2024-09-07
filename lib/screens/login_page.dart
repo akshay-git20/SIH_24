@@ -52,58 +52,58 @@ class _LoginPageState extends State<LoginPage>
                 stops: <double>[0.0, 1.0],
                 tileMode: TileMode.clamp),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: Image(
-                    height:
-                        MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
-                    fit: BoxFit.fill,
-                    image: const AssetImage('assets/img/img1-removebg-preview.jpg')),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Text('BotanyFix',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white),),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: _buildMenuBar(context),
-              ),
-              Expanded(
-                flex: 2,
-                child: PageView(
-                  controller: _pageController,
-                  physics: const ClampingScrollPhysics(),
-                  onPageChanged: (int i) {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    if (i == 0) {
-                      setState(() {
-                        right = Colors.white;
-                        left = Colors.black;
-                      });
-                    } else if (i == 1) {
-                      setState(() {
-                        right = Colors.black;
-                        left = Colors.white;
-                      });
-                    }
-                  },
-                  children: <Widget>[
-                    ConstrainedBox(
-                      constraints: const BoxConstraints.expand(),
-                      child: const SignIn(),
-                    ),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints.expand(),
-                      child: const SignUp(),
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 40.0),
+                  child: Image(
+                      height:
+                          MediaQuery.of(context).size.height > 800 ? 191.0 : 150,
+                      fit: BoxFit.fill,
+                      image: const AssetImage('assets/img/img1-removebg-preview.jpg')),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text('BotanyFix',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: _buildMenuBar(context),
+                ),
+                Flexible(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const ClampingScrollPhysics(),
+                    onPageChanged: (int i) {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      if (i == 0) {
+                        setState(() {
+                          right = Colors.white;
+                          left = Colors.black;
+                        });
+                      } else if (i == 1) {
+                        setState(() {
+                          right = Colors.black;
+                          left = Colors.white;
+                        });
+                      }
+                    },
+                    children: <Widget>[
+                      ConstrainedBox(
+                        constraints: const BoxConstraints.expand(),
+                        child: const SignIn(),
+                      ),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints.expand(),
+                        child: const SignUp(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

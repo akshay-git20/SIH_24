@@ -79,10 +79,10 @@ class _UserBottomNavState extends State<UserBottomNav> {
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-          backgroundColor: Colors.green[100],
+          backgroundColor: Color(0xFF4a7c59),
           itemCount: 4,
           tabBuilder: (int index, bool isActive) {
-            final color = isActive ? Colors.blue : Colors.grey;
+            final color = isActive ? Colors.black :  Colors.white;
             IconData iconData = Icons.quiz; // Default value
             String label = 'Quiz'; 
 
@@ -121,7 +121,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
             );
           },
           activeIndex: _currentIndex,
-          splashColor: Colors.blue,
+          splashColor: Colors.green,
           gapLocation: GapLocation.none,
           notchSmoothness: NotchSmoothness.defaultEdge,
           onTap: onTappedBar,
