@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:sih_24/theme.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YouTubePlayerPage extends StatefulWidget {
   final String videoId;
+  final String videoTitle;
 
-  YouTubePlayerPage({required this.videoId});
+  YouTubePlayerPage({required this.videoId, required this.videoTitle});
 
   @override
   _YouTubePlayerPageState createState() => _YouTubePlayerPageState();
@@ -42,8 +40,12 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
         centerTitle: true,
         backgroundColor: CustomTheme.loginGradientStart,
         title: Text(
-          'YouTube Player',
-          style: TextStyle(color: Colors.white),
+          widget.videoTitle,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -58,6 +60,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
+                color: Colors.black,
                 image: DecorationImage(
                   image: AssetImage("assets/img/background.png"),
                   fit: BoxFit.cover,
@@ -67,6 +70,10 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
                 child: YoutubePlayer(
                   controller: _controller,
                   showVideoProgressIndicator: true,
+                  progressColors: ProgressBarColors(
+                    playedColor: Colors.redAccent,
+                    handleColor: Colors.red,
+                  ),
                   onReady: () {
                     _controller.addListener(() {});
                   },
@@ -80,37 +87,95 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
   }
 }
 
+class YouTubeListPage extends StatefulWidget {
+  @override
+  _YouTubeListPageState createState() => _YouTubeListPageState();
+}
 
-class YouTubeListPage extends StatelessWidget {
-  final List<Map<String, String>> videos = [
-    {
-      'title': 'Crop Disease and their control',
-      'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/OtiqxEaNY2o?si=qJdqh1ooeQRU18MU")!
-    },
-    {
-      'title': 'All Crop solutions',
-      'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/Saip4YcQLOQ?si=nKVW0O-dnlCj7tFQ")!
-    },
-    {
-      'title': 'Crop Protection',
-      'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/nDYTA-eqGOQ?si=kAC5f7tn_YLkVFLk")! 
-    },
-    {
-      'title': 'State Management in Flutter',
-      'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/nDYTA-eqGOQ?si=kAC5f7tn_YLkVFLk")! 
-    },
-  ];
+class _YouTubeListPageState extends State<YouTubeListPage> {
+  String _selectedLanguage = 'English'; // Default language selection
+
+  // List of videos with associated language
+  final Map<String, List<Map<String, String>>> languageVideos = {
+    'English': [
+      {
+        'title': 'Crop Disease and their Control',
+        'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/OtiqxEaNY2o")!,
+      },
+      {
+        'title': 'All Crop Solutions',
+        'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/nDYTA-eqGOQ")!,
+      },
+    ],
+    'Hindi': [
+      {
+        'title': 'Crop Protection',
+        'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/Saip4YcQLOQ")!,
+      },
+      {
+        'title': 'State Management in Flutter',
+        'videoId': YoutubePlayer.convertUrlToId("https://youtu.be/nDYTA-eqGOQ")!,
+      },
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> videos = languageVideos[_selectedLanguage]!;
+
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: CustomTheme.loginGradientStart, 
-        title: Text('YouTube Player List',style: TextStyle(color: Colors.white),),
+        backgroundColor: CustomTheme.loginGradientStart,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                'Recommended Videos',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  letterSpacing: 1.2,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(width: 20),
+            DropdownButton<String>(
+              elevation: 42,
+              borderRadius: BorderRadius.circular(10), 
+              value: _selectedLanguage,
+              icon: Icon(Icons.arrow_drop_down, color: Colors.white),
+              dropdownColor: CustomTheme.loginGradientStart,
+              underline: Container(),
+              items: <String>['English', 'Hindi']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedLanguage = newValue!;
+                });
+              },
+            ),
+          ],
+        ),
+        elevation: 6, // Add some elevation to make the AppBar stand out
       ),
       body: Container(
+        padding: EdgeInsets.all(16),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/img/background.png"),
@@ -121,30 +186,47 @@ class YouTubeListPage extends StatelessWidget {
           itemCount: videos.length,
           itemBuilder: (context, index) {
             return Card(
-              margin: EdgeInsets.all(10.0),
-              elevation: 5.0,
+              elevation: 42.0, // Add a bit more elevation to the card for depth
+              margin: EdgeInsets.symmetric(vertical: 10.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: InkWell(
+                borderRadius: BorderRadius.circular(15.0),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => YouTubePlayerPage(
                         videoId: videos[index]['videoId']!,
+                        videoTitle: videos[index]['title']!,
                       ),
                     ),
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.play_circle_fill,
-                        color: Colors.red,
-                        size: 40.0,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            'https://img.youtube.com/vi/${videos[index]['videoId']}/0.jpg',
+                            width: 100,
+                            height: 70,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                       SizedBox(width: 15.0),
                       Expanded(
@@ -153,6 +235,8 @@ class YouTubeListPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                            letterSpacing: 0.5,
                           ),
                         ),
                       ),
